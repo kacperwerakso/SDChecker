@@ -5,6 +5,7 @@ import datetime
 import argparse
 import json
 import getpass
+import argparse
 
 try:
     import GPUtil
@@ -391,22 +392,9 @@ def pretty_print(report, show_boot=False):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Rozszerzone info o systemie")
-    parser.add_argument("--json", action="store_true", help="zapisz raport do system_report.json")
-    parser.add_argument("--top", type=int, default=5, help="ile top procesów pokazać")
-    parser.add_argument("--quiet", action="store_true", help="tylko json (bez pretty print)")
-    args = parser.parse_args()
-
+    args = argparse.Namespace(top=5, json=False, quiet=False)
     report = collect_all(args)
-
-    if not args.quiet:
-        pretty_print(report)
-
-    if args.json:
-        fname = "system_report.json"
-        with open(fname, "w", encoding="utf-8") as f:
-            json.dump(report, f, indent=2, ensure_ascii=False)
-        print("Zapisano raport do", fname)
+    pretty_print(report)
 
 if __name__ == "__main__":
     main()
