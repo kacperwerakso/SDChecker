@@ -311,7 +311,7 @@ def pretty_print(report, show_boot=False):
         print("Czas pracy:", up.get("uptime_human","-"))
     print()
 
-    print("-"*24, "CPU", "-"*25)
+    print("="*25, "CPU", "="*24)
     cpu = report.get("cpu", {})
     phys = cpu.get("physical_cores") or cpu.get("total_logical_cpus") or "-"
     print(f"Ilość rdzeni: {phys}")
@@ -326,15 +326,30 @@ def pretty_print(report, show_boot=False):
     if cpu.get("detailed") and cpu["detailed"].get("brand_raw"):
         print("CPU model:", cpu["detailed"]["brand_raw"])
     print()
+    
+    print("=" * 25, "GPU", "=" * 24)
+    gpu = report.get("gpu", {})
+    if gpu.get("available"):
+        for g in gpu.get("gpus", []):
+            mem_used = g.get("memory_used")
+            mem_total = g.get("memory_total")
+            mem_used_s = f"{mem_used}MB" if mem_used is not None else "-"
+            mem_total_s = f"{mem_total}MB" if mem_total is not None else "-"
+            load = g.get("load_percent") or 0.0
+            temp = g.get("temperature_c") or "-"
+            print(f"{g.get('name','-')}  | Obciążenie: {float(load):.1f}% \nPamięć VRAM: {mem_used_s} / {mem_total_s}  | Temp: {temp}C")
+    else:
+        print(gpu.get("note") or gpu.get("error") or "Brak info o GPU")
+    print()
 
-    print("-"*23, "Pamięć", "-"*23)
+    print("="*25, "RAM", "="*24)
     mem = report.get("memory", {})
     print("RAM całkowity:", mem.get("total", "-"))
     print("RAM użyte:", mem.get("used", "-"), f"({mem.get('percent','-')}%)")
     print()
 
 
-    print("-"*23, "Dyski", "-"*24)
+    print("="*24, "Dyski", "="*23)
     for p in report.get("disks", {}).get("partitions", []):
         dev = p.get("device", "-")
         mount = p.get("mountpoint", "-")
@@ -344,7 +359,7 @@ def pretty_print(report, show_boot=False):
         print(f"{dev} typ: {fstype}  rozmiar: {total}  zajęte: {pct}%")
     print()
 
-    print("-" * 24, "Sieć", "-" * 24)
+    print("=" * 25, "Sieć", "=" * 23)
     network = report.get("network", {})
     interfaces = network.get("interfaces", {})
 
@@ -370,23 +385,7 @@ def pretty_print(report, show_boot=False):
     print("VPN: aktywny" if vpn_active else "VPN: brak")
 
     print()
-
-    print("-" * 25, "GPU", "-" * 24)
-    gpu = report.get("gpu", {})
-    if gpu.get("available"):
-        for g in gpu.get("gpus", []):
-            mem_used = g.get("memory_used")
-            mem_total = g.get("memory_total")
-            mem_used_s = f"{mem_used}MB" if mem_used is not None else "-"
-            mem_total_s = f"{mem_total}MB" if mem_total is not None else "-"
-            load = g.get("load_percent") or 0.0
-            temp = g.get("temperature_c") or "-"
-            print(f"{g.get('name','-')}  | Obciążenie: {float(load):.1f}% \nPamięć VRAM: {mem_used_s} / {mem_total_s}  | Temp: {temp}C")
-    else:
-        print(gpu.get("note") or gpu.get("error") or "Brak info o GPU")
-    print()
     print(54*"=")
-
 
 
 
