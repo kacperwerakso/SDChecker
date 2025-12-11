@@ -1,26 +1,33 @@
-# SDChecker
-"System Details Checker" is an application that gain system information about: system version, disks,
-processor, RAM and IP
+**SDChecker** is a lightweight system information tool that provides a quick overview of key hardware and system parameters on Windows.
 
+---
 
-# Objective
-The main goal of the project is an application that gives a quick overview of system parameters.
-It can be useful both for programmers and IT specialists, at work and directly with the client.
+## Features
 
+- *System*
+  - OS name, architecture, current user
+  - System uptime
 
-# Use 
-You only need the "sdchecker.exe" file to use this application(practical way),
-but you can also run "sdchecker.py" in any code editor and it will work the same.
+- *CPU*
+  - Core count
+  - Current frequency
+  - CPU model
 
-It only works on Windows system.
+- *Memory*
+  - Total RAM
+  - Current RAM usage
 
+- *Disks*
+  - Detected partitions
+  - File system type
+  - Total and used space
 
-# Code
-Program is written in Python using libraries like:
-- psutil
-- platform
-- pyinstaller(was necessary when creating the .exe file)
+- *Network*
+  - IPv4 address
+  - VPN detection
 
-All useful code is in "sdchecker.py" file.
-
-"index.html" is the graphic design of the project, it also offers the option of downloading the file.
+- *GPU*
+  - GPU name
+  - GPU load
+  - VRAM total size
+  - Temperature
