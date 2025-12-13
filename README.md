@@ -1,33 +1,5 @@
-**SDChecker** is a lightweight system information tool that provides a quick overview of key hardware and system parameters on Windows.
+# System Diagnostics Tool
+A lightweight diagnostic application that displays detailed information about the system and computer hardware.
 
----
-
-## Features
-
-- *System*
-  - OS name, architecture, current user
-  - System uptime
-
-- *CPU*
-  - Core count
-  - Current frequency
-  - CPU model
-
-- *Memory*
-  - Total RAM
-  - Current RAM usage
-
-- *Disks*
-  - Detected partitions
-  - File system type
-  - Total and used space
-
-- *Network*
-  - IPv4 address
-  - VPN detection
-
-- *GPU*
-  - GPU name
-  - GPU load
-  - VRAM total size
-  - Temperature
+# Features
+System Diagnostics Tool provides comprehensive insights into the operating system, current user, and system uptime, along with detailed CPU information such as core count, processor model, and real-time usage. It monitors RAM status, analyzes disk partitions with their size and usage levels, and displays network details including IPv4 address and VPN status. The application also reads GPU load, VRAM usage, and temperature, all while running without requiring installation.
